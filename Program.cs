@@ -42,13 +42,14 @@ namespace Lab4
                 double sum = 0;
                 for (int i = 0; i < NumberOfSensors; i++)
                     sum += OneDivSquare(dispersion[i]);
+
                 k = 1.0 / sum;
                 Console.WriteLine($"k = {k}");
 
                 for(int i = 0; i < NumberOfSensors; i++)
-                {
                     p[i] = k * OneDivSquare(dispersion[i]);
-                }
+
+                Console.WriteLine("Array of p:");
                 OutputArray(p);
 
                 lambda = l * (2 * p[0] * p[1] * p[2] * p[3]) /
@@ -56,25 +57,22 @@ namespace Lab4
                 Console.WriteLine($"lambda = {lambda}");
 
                 for (int i = 0; i < NumberOfSensors; i++)
-                {
                     qDelta[i] = - lambda / (2 * p[i]);
-                }
+
+                Console.WriteLine("Array of delta q:");
                 OutputArray(qDelta);
 
                 for (int i = 0; i < NumberOfSensors; i++)
-                {
                     q[i] = xWave[i] - qDelta[i];
-                }
 
                 double check = q[0] + q[1] + q[2] - q[3];
+
                 if (check < Eps)
-                {
                     Console.WriteLine("Everything is OK.");
-                }
                 else
-                {
                     Console.WriteLine("Got some error");
-                }
+
+                Console.WriteLine("Array of q:");
                 OutputArray(q);
                 Console.WriteLine($"Check is {check}");
             }
